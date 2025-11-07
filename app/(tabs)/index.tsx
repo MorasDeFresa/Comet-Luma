@@ -1,16 +1,25 @@
 import BooksTable from "@/components/BooksTable";
 import { fetchBooks } from "@/services/api";
 import useFetch from "@/services/useFetch";
-import { useRouter } from "expo-router";
-import { ActivityIndicator, ScrollView, Text, View } from "react-native";
+import usePagination from "@/services/usePagination";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, Button, ScrollView, Text, View } from "react-native";
 
 export default function Index() {
-  const router = useRouter();
+  const [page, setPage] = useState(0)
+  const [sizePage, setSizePage] = useState(10)
   const {
     data: books,
     loading: booksLoading,
     error: booksError,
   } = useFetch(() => fetchBooks({ query: "" }));
+
+  const { paginate, dataStructure } = usePagination();
+
+  useEffect(() => {
+    books ? paginate(books, sizePage) : [];
+  }, [sizePage])
+
   return (
     <View className="flex-1 justify-center items-center px-2 py-2">
       <Text className="text-5xl text-primary font-bold">Comet Luma</Text>
@@ -18,6 +27,12 @@ export default function Index() {
         Un espacio de descubrimiento
       </Text>
       <Text className="px-2 py-2 text-justify">Interactua con el titulo o la descripcion del libro para obtener mas información</Text>
+      <View className="flex-row">
+        <Button title="10" onPress={() => setSizePage(10)} />
+        <Button title="50" onPress={() => setSizePage(50)} />
+        <Button title="100" onPress={() => setSizePage(100)} />
+      </View>
+
       <ScrollView
         className="flex-1 px-3 min-w-full"
         showsHorizontalScrollIndicator={false}
@@ -32,7 +47,7 @@ export default function Index() {
         ) : booksError ? (
           <Text>Error: {booksError?.message}</Text>
         ) : (
-          <BooksTable books={books} />
+          <BooksTable books={dataStructure[page]?.data} />
         )}
       </ScrollView>
     </View>
