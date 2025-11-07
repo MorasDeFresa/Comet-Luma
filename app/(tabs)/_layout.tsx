@@ -8,16 +8,16 @@ const _layout = () => {
                 name='index'
                 options={
                     {
-                        title: 'Home',
-                        headerShown: true
+                        title: 'Inicio',
+                        headerShown: false
                     }
                 } />
             <Tabs.Screen
                 name='create'
                 options={
                     {
-                        title: 'Create',
-                        headerShown: true
+                        title: 'Crear',
+                        headerShown: false
                     }
                 } />
         </Tabs>
