@@ -16,7 +16,7 @@ const BooksTable = ({ books }) => {
         keyExtractor={(item) => item.userId.toString() + item.id.toString()}
         scrollEnabled={false}
         renderItem={({ item }) => (
-          <TouchableHighlight onLongPress={() => { Alert.alert('You long-pressed the button!'); }} underlayColor="white">
+          <TouchableHighlight onPress={() => { Alert.alert('You long-pressed the button!'); }} underlayColor="white">
             <View className="flex-row py-7 border-b">
               <Text className="flex-1 px-1 text-black text-3xl">
                 {item.title.length > 5 ? `${item.title.slice(0, 5)}…` : item.title}

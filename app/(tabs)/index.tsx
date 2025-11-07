@@ -17,7 +17,7 @@ export default function Index() {
       <Text className="text-2xl text-primary font-bold">
         Un espacio de descubrimiento
       </Text>
-      <Text className="px-2 py-2 text-justify">Manten presionado el titulo o la descripcion del libro para obtener mas información</Text>
+      <Text className="px-2 py-2 text-justify">Interactua con el titulo o la descripcion del libro para obtener mas información</Text>
       <ScrollView
         className="flex-1 px-3 min-w-full"
         showsHorizontalScrollIndicator={false}
